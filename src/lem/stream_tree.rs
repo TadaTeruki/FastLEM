@@ -119,8 +119,8 @@ impl StreamTree {
                 return;
             }
 
-            let mut steepest_slope = 0.0;
-            graph.neighbors_of(i).iter().for_each(|ja| {
+            let mut steepest_slope: f64 = 0.0;
+            graph.neighbors_of(i).iter().for_each(|ja: &(usize, f64)| {
                 let j = ja.0;
                 if elevations[i] > elevations[j] {
                     let distance = ja.1;
