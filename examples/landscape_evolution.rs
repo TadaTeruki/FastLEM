@@ -5,7 +5,7 @@ extern crate fastlem;
 
 fn main() {
     // Number of sites
-    let num = 30000;
+    let num = 10000;
 
     // Bounding box to generate random sites and render terrain data to image
     let bound_min = Site2D { x: 0.0, y: 0.0 };
@@ -30,6 +30,7 @@ fn main() {
                 .map(|_| TopographicalParameters::default().set_erodibility(1.0))
                 .collect::<_>(),
         )
+        .set_max_iteration(200)
         .generate()
         .unwrap();
 
@@ -52,7 +53,7 @@ fn main() {
             let site = Site2D { x, y };
             let elevation = terrain.get_elevation(&site);
             if let Some(elevation) = elevation {
-                let color = ((elevation / max_elevation) * 255.0) as u8;
+                let color: u8 = ((elevation / max_elevation) * 255.0) as u8;
                 image_buf.put_pixel(imgx as u32, imgy as u32, image::Rgb([color, color, color]));
             }
         }
