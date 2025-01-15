@@ -43,30 +43,6 @@ impl PartialOrd for RidgeElement {
     }
 }
 
-struct StreamOriginElement {
-    stream_order: usize,
-}
-
-impl PartialEq for StreamOriginElement {
-    fn eq(&self, other: &Self) -> bool {
-        self.stream_order == other.stream_order
-    }
-}
-
-impl Eq for StreamOriginElement {}
-
-impl PartialOrd for StreamOriginElement {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
-impl Ord for StreamOriginElement {
-    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        other.stream_order.cmp(&self.stream_order)
-    }
-}
-
 impl StreamTree {
     /// Constructs a stream tree from a given terrain data.
     pub fn construct<S: Site>(
